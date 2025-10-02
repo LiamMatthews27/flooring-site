@@ -1,0 +1,299 @@
+/* ---------- Variables ---------- */
+:root {
+  --primary: #1e2a38;
+  --accent: #00bfa6;
+  --secondary: #f5f5f7;
+  --highlight: #ffc857;
+  --card-bg: #ffffff;
+  --card-hover: #00d4b8;
+  --text-dark: #0f1a28;
+}
+
+/* ---------- Base ---------- */
+body, .home {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  background: var(--secondary);
+  color: var(--text-dark);
+}
+
+/* ---------- Hero Section ---------- */
+.hero {
+  background: linear-gradient(135deg, #00bfa6, #1e2a38);
+  text-align: center;
+  padding: 10rem 2rem;
+  border-bottom-left-radius: 50px;
+  border-bottom-right-radius: 50px;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  left: -50%;
+  bottom: 0;
+  width: 200%;
+  height: 100%;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.1), transparent 70%);
+  animation: wave 6s infinite linear;
+  pointer-events: none;
+}
+
+@keyframes wave {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(50%); }
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  animation: text-glow 2s infinite alternate;
+}
+
+@keyframes text-glow {
+  0% { text-shadow: 0 0 5px var(--highlight), 0 0 10px var(--highlight); }
+  100% { text-shadow: 0 0 15px var(--highlight), 0 0 25px var(--highlight); }
+}
+
+.hero .highlight {
+  color: var(--highlight);
+}
+
+.hero p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.cta-btn {
+  padding: 1rem 2rem;
+  background: var(--highlight);
+  border: none;
+  border-radius: 30px;
+  color: var(--primary);
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+  animation: btn-bounce 2s infinite;
+}
+
+.cta-btn:hover {
+  background: white;
+  transform: scale(1.1);
+}
+
+@keyframes btn-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+/* ---------- Story Section ---------- */
+.story {
+  padding: 5rem 2rem;
+  text-align: center;
+}
+
+.story h2 {
+  font-size: 2rem;
+  margin-bottom: 3rem;
+}
+
+.story-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.story-card {
+  background: linear-gradient(145deg, #ffffff, #e8f3f0);
+  padding: 2rem;
+  border-radius: 20px;
+  width: 280px;
+  box-shadow: 5px 5px 20px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+
+.story-card:hover {
+  transform: translateY(-5px);
+  background: var(--accent);
+  color: white;
+}
+
+/* ---------- Services Section ---------- */
+.services {
+  padding: 5rem 2rem;
+  text-align: center;
+}
+
+.services h2 {
+  font-size: 2rem;
+  margin-bottom: 3rem;
+}
+
+.services-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.service-card {
+  width: 220px;
+  height: 220px;
+  background: var(--card-bg);
+  border-radius: 25px;
+  box-shadow: 5px 5px 20px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  text-align: center;
+  padding: 1rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.service-card:hover {
+  transform: translateY(-10px);
+  background: var(--card-hover);
+  color: white;
+}
+
+/* ---------- Counters Section ---------- */
+.counters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 3rem;
+  padding: 4rem 2rem;
+  background: linear-gradient(135deg, var(--accent), var(--primary));
+  color: white;
+}
+
+.counter h3 {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+.counter p {
+  font-weight: 500;
+}
+
+/* ---------- Testimonials Section 3D Hardcore ---------- */
+.testimonials {
+  padding: 5rem 2rem;
+  text-align: center;
+}
+
+.testimonials h2 {
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  color: var(--primary);
+}
+
+.testimonial-carousel {
+  perspective: 1200px;
+  padding: 0 2rem;
+}
+
+.slick-slide {
+  opacity: 0.5;
+  transform: scale(0.85) rotateY(0deg);
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.slick-center .testimonial-card {
+  transform: scale(1.05) rotateY(0deg);
+  opacity: 1;
+  box-shadow: 0 25px 70px rgba(0,0,0,0.3);
+  border: 2px solid var(--accent);
+}
+
+.slick-slide:not(.slick-center) .testimonial-card {
+  transform: scale(0.9) rotateY(15deg);
+}
+
+.testimonial-wrapper {
+  padding: 0 10px;
+}
+
+.testimonial-card-link {
+  text-decoration: none;
+}
+
+.testimonial-card {
+  background: rgba(255,255,255,0.95);
+  padding: 2rem 1.5rem;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+  transition: transform 0.5s ease, box-shadow 0.5s ease, border 0.3s ease;
+  cursor: pointer;
+}
+
+.testimonial-card:hover {
+  transform: scale(1.07) rotateY(0deg);
+  box-shadow: 0 30px 90px rgba(0,0,0,0.4);
+}
+
+/* ---------- Slick Arrows & Dots ---------- */
+.slick-prev, .slick-next {
+  width: 45px;
+  height: 45px;
+  background: var(--accent);
+  border-radius: 50%;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+}
+
+.slick-prev:hover, .slick-next:hover {
+  background: var(--highlight);
+  transform: scale(1.15);
+}
+
+.slick-prev:before, .slick-next:before {
+  color: white;
+  font-size: 22px;
+  opacity: 1;
+}
+
+.slick-prev { left: -60px; }
+.slick-next { right: -60px; }
+
+.slick-dots li button:before {
+  color: var(--accent); opacity: 0.7;
+}
+.slick-dots li.slick-active button:before {
+  color: var(--highlight); opacity: 1;
+}
+
+/* ---------- Floating CTA ---------- */
+.floating-cta {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  background: var(--accent);
+  color: white;
+  padding: 0.8rem 1.5rem;
+  border-radius: 30px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+}
+
+.floating-cta:hover {
+  background: var(--highlight);
+  color: var(--primary);
+  transform: scale(1.05);
+}
