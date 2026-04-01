@@ -14,14 +14,47 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const blogPosts = [
-  // ... (keep your blog posts same as before)
+  {
+    id: 1,
+    title: "Laminate Flooring Installation Tips",
+    shortDesc: "Quick tips to install laminate flooring like a pro.",
+    fullDesc: "Full detailed guide on installing laminate flooring, from measurement to finishing touches...",
+    image: img1,
+  },
+  {
+    id: 2,
+    title: "Choosing Vinyl Flooring",
+    shortDesc: "How to pick the perfect vinyl flooring for your home.",
+    fullDesc: "Everything you need to know about selecting vinyl floors, types, and installation...",
+    image: vinyl1,
+  },
+  {
+    id: 3,
+    title: "Blinds Installation Guide",
+    shortDesc: "Modern roller & venetian blinds installation tips.",
+    fullDesc: "Step-by-step guide on blinds installation, measuring, and maintenance...",
+    image: blinds1,
+  },
+  {
+    id: 4,
+    title: "Maintenance Tips for Floors",
+    shortDesc: "Keep your floors looking brand new.",
+    fullDesc: "How to clean, maintain, and protect your floors from damage...",
+    image: maintenance,
+  },
+  {
+    id: 5,
+    title: "Expanding Your Flooring Options",
+    shortDesc: "Explore new flooring trends.",
+    fullDesc: "Latest trends in laminate, vinyl, and bamboo flooring for modern homes...",
+    image: expansion,
+  },
 ];
 
 const Blog = () => {
   const [selectedPost, setSelectedPost] = useState(null);
-  const [selectedImage, setSelectedImage] = useState(null); // ✅ For gallery modal
+  const [selectedImage, setSelectedImage] = useState(null);
 
-  // ✅ Slider settings
   const sliderSettings = {
     dots: true,
     infinite: true,
@@ -31,12 +64,9 @@ const Blog = () => {
     autoplay: true,
     autoplaySpeed: 3000,
     responsive: [
-      {
-        breakpoint: 768, // tablets & below
-        settings: {
-          slidesToShow: 1,
-        },
-      },
+      { breakpoint: 1024, settings: { slidesToShow: 2 } },
+      { breakpoint: 768, settings: { slidesToShow: 1 } },
+      { breakpoint: 480, settings: { slidesToShow: 1 } },
     ],
   };
 
@@ -46,14 +76,14 @@ const Blog = () => {
 
       <div className="blog-grid">
         {blogPosts.map((post) => (
-          <div
+          <article
             key={post.id}
             className="blog-card"
             onClick={() => setSelectedPost(post)}
           >
             <div className="card-inner">
               <div className="card-front">
-                <img src={post.image} alt={post.title} />
+                <img src={post.image} alt={post.title} loading="lazy" />
                 <h3>{post.title}</h3>
               </div>
               <div className="card-back">
@@ -61,7 +91,7 @@ const Blog = () => {
                 <span className="read-more">Click to Read More</span>
               </div>
             </div>
-          </div>
+          </article>
         ))}
       </div>
 
@@ -94,7 +124,6 @@ const Blog = () => {
       {/* FAQ Section */}
       <section className="faq-section">
         <h2>FAQs</h2>
-
         {[
           { q: "How do I clean laminate floors?", a: "Use water and a damp cloth. Avoid chemical cleaners—they leave residue and glare." },
           { q: "Do you install expansion gaps?", a: "Yes! This prevents buckling during winter." },
@@ -113,7 +142,7 @@ const Blog = () => {
         ))}
       </section>
 
-      {/* ✅ New Gallery Section */}
+      {/* Gallery Section */}
       <section className="gallery-section">
         <h2>Our Work</h2>
         <p className="gallery-subtitle">
@@ -126,14 +155,15 @@ const Blog = () => {
                 src={img}
                 alt={`Work ${i + 1}`}
                 className="gallery-img"
-                onClick={() => setSelectedImage(img)} // ✅ open modal on click
+                loading="lazy"
+                onClick={() => setSelectedImage(img)}
               />
             </div>
           ))}
         </Slider>
       </section>
 
-      {/* ✅ Gallery Modal */}
+      {/* Gallery Modal */}
       {selectedImage && (
         <div className="modal-overlay" onClick={() => setSelectedImage(null)}>
           <div
@@ -145,6 +175,7 @@ const Blog = () => {
           </div>
         </div>
       )}
+
     </div>
   );
 };

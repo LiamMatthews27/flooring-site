@@ -4,13 +4,58 @@ import "./Contact.css";
 function Contact() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [status, setStatus] = useState("");
+  const [statusType, setStatusType] = useState(""); // success or error
+  const [loading, setLoading] = useState(false);
+  const [emailValid, setEmailValid] = useState(true);
+
+  // ✅ Known disposable email domains
+  const disposableDomains = [
+    "mailinator.com", "tempmail.com", "10minutemail.com",
+    "guerrillamail.com", "trashmail.com", "fakeinbox.com",
+    "yopmail.com", "getnada.com", "maildrop.cc"
+  ];
+
+  // ✅ Validate email format
+  const isValidEmail = (email) => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  };
+
+  // ✅ Check if email is disposable
+  const isDisposableEmail = (email) => {
+    const domain = email.split("@")[1];
+    return disposableDomains.includes(domain);
+  };
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+
+    if (name === "email") {
+      const validFormat = isValidEmail(value);
+      const disposable = isDisposableEmail(value);
+      setEmailValid(validFormat && !disposable);
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!isValidEmail(formData.email)) {
+      setStatus("❌ Please enter a valid email address!");
+      setStatusType("error");
+      setTimeout(() => setStatus(""), 5000);
+      return;
+    }
+
+    if (isDisposableEmail(formData.email)) {
+      setStatus("❌ Disposable emails are not allowed!");
+      setStatusType("error");
+      setTimeout(() => setStatus(""), 5000);
+      return;
+    }
+
+    setLoading(true);
 
     try {
       const res = await fetch("http://localhost:5000/contact", {
@@ -21,10 +66,18 @@ function Contact() {
 
       const data = await res.json();
       setStatus(data.msg);
+      setStatusType(data.msg.startsWith("✅") ? "success" : "error");
       setFormData({ name: "", email: "", message: "" });
+      setEmailValid(true);
+
+      setTimeout(() => setStatus(""), 5000);
     } catch (err) {
       console.error(err);
       setStatus("❌ Something went wrong, try again!");
+      setStatusType("error");
+      setTimeout(() => setStatus(""), 5000);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -43,12 +96,12 @@ function Contact() {
 
         <div className="info-card">
           <h2>📞 Call Us</h2>
-          <p>+27 65 555 5555</p>
+          <p>+27 84 738 9399</p>
         </div>
 
         <div className="info-card">
           <h2>📧 Email Us</h2>
-          <p>info@lrflooring.co.za</p>
+          <p>Rmatthews838@gmail.com</p>
         </div>
       </section>
 
@@ -70,7 +123,15 @@ function Contact() {
             value={formData.email}
             onChange={handleChange}
             required
+            style={{
+              borderColor: emailValid ? "" : "red",
+            }}
           />
+          {!emailValid && (
+            <p className="error-msg">
+              ❌ Please enter a valid, non-disposable email.
+            </p>
+          )}
           <textarea
             name="message"
             placeholder="Your Message"
@@ -79,9 +140,13 @@ function Contact() {
             onChange={handleChange}
             required
           ></textarea>
-          <button type="submit">📨 Send Message</button>
+
+          <button type="submit" disabled={loading || !emailValid}>
+            {loading ? <span className="spinner"></span> : "📨 Send Message"}
+          </button>
         </form>
-        {status && <p className="status">{status}</p>}
+
+        {status && <div className={`status-modal ${statusType} show`}>{status}</div>}
       </section>
     </div>
   );

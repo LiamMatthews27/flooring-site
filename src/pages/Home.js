@@ -1,8 +1,9 @@
 import React from "react";
 import Slider from "react-slick";
-import { Link } from "react-router-dom"; // ✅ Add this
-import "./Home.css";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import JourneySection from "./JourneySection";
+import "./Home.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -17,97 +18,132 @@ const testimonials = [
   { text: "Great job and affordable quality 👌 definitely a recommendation", name: "Chanel Pietersen", link: "https://www.google.com/maps/contrib/105661381408676402478/reviews?hl=en-GB" },
 ];
 
-const Home = () => {
-  const sliderSettings = {
-    dots: true,
-    infinite: true,
-    speed: 700,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    centerMode: true,
-    centerPadding: "0px",
-    autoplay: true,
-    autoplaySpeed: 4000,
-    focusOnSelect: true,
-    responsive: [
-      { breakpoint: 1024, settings: { slidesToShow: 2, centerMode: false } },
-      { breakpoint: 768, settings: { slidesToShow: 1, centerMode: false } },
-    ],
-  };
+const sliderSettings = {
+  dots: true,
+  infinite: true,
+  speed: 700,
+  slidesToShow: 3,
+  slidesToScroll: 1,
+  centerMode: true,
+  centerPadding: "0px",
+  autoplay: true,
+  autoplaySpeed: 4000,
+  focusOnSelect: true,
+  responsive: [
+    { breakpoint: 1024, settings: { slidesToShow: 2, centerMode: false } },
+    { breakpoint: 768, settings: { slidesToShow: 1, centerMode: false } },
+  ],
+};
 
+const Home = () => {
   return (
     <div className="home">
 
       {/* ---------- Hero Section ---------- */}
-      <section className="hero">
-        <div className="hero-content">
+      <motion.section 
+        className="hero"
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+      >
+        <motion.div
+          className="hero-content"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5, duration: 1 }}
+        >
           <h1>
             Transforming <span className="highlight">Homes</span> with L&R
           </h1>
           <p>Quality Laminate Flooring & Blinds with a Family Touch</p>
-          
-          {/* ✅ Updated CTA to navigate to /contact */}
           <Link to="/contact">
-            <button className="cta-btn">Get Your Free Quote</button>
+            <motion.button 
+              className="cta-btn"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Get Your Free Quote
+            </motion.button>
           </Link>
-        </div>
-      </section>
+        </motion.div>
+      </motion.section>
 
       {/* ---------- Story Section ---------- */}
       <section className="story">
         <h2>Our Story</h2>
-        <div className="story-cards">
-          <div className="story-card">
-            <p>
-              Throughout the years of holidays, <b>Liam</b>, the son of <b>Reynold</b>, helped here and there. 
-              During studies, this inspired us to start <b>L&R Laminate Flooring & Maintenance</b>.
-            </p>
-          </div>
-          <div className="story-card">
-            <p>
-              It became an innovative mindset to fight unemployment and help change lives. 
-              We aim to give youth practical experience in building and innovation.
-            </p>
-          </div>
-        </div>
+        <motion.div 
+          className="story-cards"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={{
+            hidden: {},
+            visible: { transition: { staggerChildren: 0.2 } }
+          }}
+        >
+          {[
+            "Throughout the years of holidays, Liam, the son of Reynold, helped here and there. During studies, this inspired us to start L&R Laminate Flooring & Maintenance.",
+            "It became an innovative mindset to fight unemployment and help change lives. We aim to give youth practical experience in building and innovation."
+          ].map((text, i) => (
+            <motion.div 
+              className="story-card" 
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: i * 0.2 }}
+            >
+              <p>{text}</p>
+            </motion.div>
+          ))}
+        </motion.div>
       </section>
 
       {/* ---------- Services Section ---------- */}
       <section className="services">
         <h2>What We Offer</h2>
-        <div className="services-grid">
-          <div className="service-card">
-            Laminate Flooring
-            <p>Durable, stylish flooring installations for modern homes.</p>
-          </div>
-          <div className="service-card">
-            Blinds
-            <p>Custom blinds to suit any interior design.</p>
-          </div>
-          <div className="service-card">
-            Maintenance
-            <p>Reliable flooring & blind maintenance services for lasting quality.</p>
-          </div>
-        </div>
+        <motion.div className="services-grid">
+          {[
+            { title: "Laminate Flooring", desc: "Durable, stylish flooring installations for modern homes." },
+            { title: "Blinds", desc: "Custom blinds to suit any interior design." },
+            { title: "Maintenance", desc: "Reliable flooring & blind maintenance services for lasting quality." }
+          ].map((s, i) => (
+            <motion.div 
+              className="service-card" 
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: i * 0.2 }}
+            >
+              {s.title}
+              <p>{s.desc}</p>
+            </motion.div>
+          ))}
+        </motion.div>
       </section>
 
       {/* ---------- Counters Section ---------- */}
       <section className="counters">
-        <div className="counter">
-          <h3>+17</h3>
-          <p>Years Experience</p>
-        </div>
-        <div className="counter">
-          <h3>Family</h3>
-          <p>Owned & Trusted</p>
-        </div>
-        <div className="counter">
-          <h3>Growing</h3>
-          <p>SME Supporting Youth</p>
-        </div>
+        {[
+          { value: "+17", label: "Years Experience" },
+          { value: "Family", label: "Owned & Trusted" },
+          { value: "Growing", label: "SME Supporting Youth" }
+        ].map((c, i) => (
+          <motion.div 
+            className="counter" 
+            key={i}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: i * 0.2 }}
+          >
+            <h3>{c.value}</h3>
+            <p>{c.label}</p>
+          </motion.div>
+        ))}
       </section>
 
-      {/* ---------- Journey / Timeline Section ---------- */}
+      {/* ---------- Journey Section ---------- */}
       <JourneySection />
 
       {/* ---------- Testimonials Section ---------- */}
@@ -115,7 +151,14 @@ const Home = () => {
         <h2>What Our Clients Say</h2>
         <Slider {...sliderSettings} className="testimonial-carousel">
           {testimonials.map((t, i) => (
-            <div key={i} className="testimonial-wrapper">
+            <motion.div 
+              key={i} 
+              className="testimonial-wrapper"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: i * 0.2 }}
+            >
               <a
                 href={t.link}
                 target="_blank"
@@ -127,14 +170,20 @@ const Home = () => {
                   <b>- {t.name}</b>
                 </div>
               </a>
-            </div>
+            </motion.div>
           ))}
         </Slider>
       </section>
 
       {/* ---------- Floating CTA ---------- */}
       <Link to="/contact">
-        <button className="floating-cta">📞 Get a Free Quote</button>
+        <motion.button 
+          className="floating-cta"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          📞 Get a Free Quote
+        </motion.button>
       </Link>
     </div>
   );

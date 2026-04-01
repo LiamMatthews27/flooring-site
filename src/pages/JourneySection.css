@@ -1,15 +1,16 @@
 .journey {
-  padding: 80px 20px;
-  background: #f5f5f7;
+  padding: 4rem 1rem;
+  background: var(--secondary);
   text-align: center;
 }
 
 .journey h2 {
-  font-size: 2.5rem;
-  margin-bottom: 50px;
-  color: #1e2a38;
+  font-size: 2rem;
+  margin-bottom: 3rem;
+  color: var(--primary);
 }
 
+/* ---------- Timeline ---------- */
 .timeline {
   position: relative;
   max-width: 900px;
@@ -21,7 +22,7 @@
   content: "";
   position: absolute;
   width: 4px;
-  background: #00bfa6;
+  background: var(--accent);
   top: 0;
   bottom: 0;
   left: 50%;
@@ -47,20 +48,34 @@
 
 .timeline-item .timeline-year {
   font-weight: bold;
-  color: #00bfa6;
+  color: var(--accent);
   margin-bottom: 10px;
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 
 .timeline-card {
-  background: rgba(255,255,255,0.75);
-  backdrop-filter: blur(8px);
-  padding: 20px;
+  background: rgba(255,255,255,0.8);
+  backdrop-filter: blur(6px);
+  padding: 1.5rem;
   border-radius: 15px;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
-  transition: transform 0.3s;
+  box-shadow: 0 8px 20px var(--shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .timeline-card:hover {
   transform: translateY(-5px);
+  box-shadow: 0 15px 35px var(--shadow);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+  .timeline::before { left: 8px; }
+  .timeline-item {
+    width: 100%;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    text-align: left !important;
+    margin-bottom: 2rem;
+  }
+  .timeline-item.right { left: 0; }
 }
