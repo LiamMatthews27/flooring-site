@@ -8,7 +8,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const testimonials = [
-  { text: "Flooring is impeccable , definitely a bang for your buck would reccomend , don't come across these too often", name: "Cobster Maystry", link: "https://www.google.com/maps/contrib/115435690810126572533/reviews?hl=en-GB" },
+  { text: "Flooring is impeccable, definitely a bang for your buck, would recommend, don't come across these too often.", name: "Cobster Maystry", link: "https://www.google.com/maps/contrib/115435690810126572533/reviews?hl=en-GB" },
   { text: "Really good service and quality. Highly recommend.", name: "Bracyn Valayadum", link: "https://www.google.com/maps/contrib/114545372810914165454/reviews?hl=en-GB" },
   { text: "Very good at what they do, top quality flooring and service as well as the blinds.", name: "Kevin Manhatten", link: "https://www.google.com/maps/contrib/111196853932400830475/reviews?hl=en-GB" },
   { text: "Quality and reliable service.", name: "Liam Matthews", link: "https://www.google.com/maps/contrib/110742829271271846544/reviews?hl=en-GB" },
@@ -154,7 +154,7 @@ const Home = () => {
             <motion.div 
               key={i} 
               className="testimonial-wrapper"
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: i * 0.2 }}
@@ -166,8 +166,8 @@ const Home = () => {
                 className="testimonial-card-link"
               >
                 <div className="testimonial-card">
-                  <p>“{t.text}”</p>
-                  <b>- {t.name}</b>
+                  <p className="testimonial-text">“{t.text}”</p>
+                  <b className="testimonial-author">- {t.name}</b>
                 </div>
               </a>
             </motion.div>

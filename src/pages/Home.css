@@ -162,23 +162,27 @@ body, .home {
 .testimonials {
   padding: 4rem 2rem;
   text-align: center;
+  background: #f9f9f9;
 }
 
 .testimonials h2 {
   font-size: 2rem;
   margin-bottom: 2.5rem;
   color: var(--primary);
+  font-weight: 700;
+  letter-spacing: 0.5px;
 }
 
 .testimonial-carousel {
   perspective: 1200px;
-  padding: 0 1rem;
+  padding: 0 0.5rem;
 }
 
 .slick-slide {
-  opacity: 0.6;
-  transform: scale(0.9);
+  opacity: 0.7;
+  transform: scale(0.95);
   transition: all 0.5s ease;
+  padding: 0 10px;
 }
 
 .slick-center .testimonial-card {
@@ -190,16 +194,34 @@ body, .home {
 
 .testimonial-card {
   background: var(--card-bg);
-  padding: 1.5rem 1rem;
-  border-radius: 20px;
+  padding: 2rem 1.5rem;
+  border-radius: 25px;
   text-align: center;
-  box-shadow: 0 10px 25px var(--shadow);
+  box-shadow: 0 12px 30px var(--shadow);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: grab;
 }
 
 .testimonial-card:hover {
   transform: scale(1.05);
-  box-shadow: 0 20px 50px var(--shadow);
+  box-shadow: 0 25px 60px var(--shadow);
+}
+
+.testimonial-text {
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+  color: var(--text-dark);
+}
+
+.testimonial-author {
+  font-size: 1.05rem;
+  color: var(--accent);
+  font-weight: 600;
 }
 
 /* ---------- Slick Arrows & Dots ---------- */
@@ -223,13 +245,14 @@ body, .home {
 .slick-prev:before, .slick-next:before {
   color: var(--text-light);
   font-size: 20px;
-  opacity: 1;
 }
 
 .slick-dots li button:before {
   color: var(--accent);
   opacity: 0.7;
+  font-size: 12px;
 }
+
 .slick-dots li.slick-active button:before {
   color: var(--highlight);
   opacity: 1;
@@ -263,24 +286,31 @@ body, .home {
   .story-cards, .services-grid {
     justify-content: center;
   }
+
+  .testimonial-card {
+    padding: 1.5rem;
+    min-height: 160px;
+  }
+
+  .slick-slide {
+    padding: 0 8px;
+  }
 }
 
 @media (max-width: 768px) {
-  .hero h1 {
-    font-size: 2rem;
-  }
-  .hero p {
-    font-size: 1rem;
-  }
-  .story-card, .service-card {
-    width: 90%;
-  }
-  .counters {
-    flex-direction: column;
-  }
+  .hero h1 { font-size: 2rem; }
+  .hero p { font-size: 1rem; }
+  .story-card, .service-card { width: 90%; }
+  .counters { flex-direction: column; }
   .testimonial-card {
-    padding: 1rem;
+    width: 90% !important;
+    padding: 1.2rem;
+    min-height: 140px;
+    font-size: 0.95rem;
+    margin: 0 auto;
   }
-  .slick-prev { left: -40px; }
-  .slick-next { right: -40px; }
+  .slick-slide { transform: scale(1); opacity: 1; padding: 0 5px; }
+  .slick-prev { left: -25px; }
+  .slick-next { right: -25px; }
+  .slick-dots li button:before { font-size: 10px; }
 }
