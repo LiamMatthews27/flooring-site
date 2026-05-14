@@ -2,11 +2,10 @@ require("dotenv").config();
 
 const express = require("express");
 const cors = require("cors");
-const { Resend } = require("resend");
+const nodemailer = require("nodemailer");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-const resend = new Resend(process.env.RESEND_API_KEY);
 
 app.use(cors({
   origin: process.env.FRONTEND_URL,
@@ -15,6 +14,16 @@ app.use(express.json());
 
 app.get("/", (req, res) => {
   res.send("Backend running 🚀");
+});
+
+const transporter = nodemailer.createTransport({
+  host: "smtp.gmail.com",
+  port: 587,
+  secure: false,
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
+  },
 });
 
 const escapeHtml = (str) =>
@@ -39,8 +48,8 @@ app.post("/contact", async (req, res) => {
 
   try {
     // Email to you
-    await resend.emails.send({
-      from: "LR Flooring <onboarding@resend.dev>",
+    await transporter.sendMail({
+      from: `"LR Flooring Website" <${process.env.EMAIL_USER}>`,
       to: process.env.EMAIL_TO,
       subject: `📩 New Website Enquiry - ${safeName}`,
       html: `
@@ -55,8 +64,8 @@ app.post("/contact", async (req, res) => {
     });
 
     // Auto-reply to client
-    await resend.emails.send({
-      from: "LR Flooring & Blinds <onboarding@resend.dev>",
+    await transporter.sendMail({
+      from: `"LR Flooring & Blinds" <${process.env.EMAIL_USER}>`,
       to: email,
       subject: "✅ Thanks for contacting LR Flooring & Blinds",
       html: `
