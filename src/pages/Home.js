@@ -8,11 +8,11 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const testimonials = [
-  { text: "Flooring is impeccable, definitely a bang for your buck, would recommend, don't come across these too often.", name: "Cobster Maystry", link: "https://www.google.com/maps/contrib/115435690810126572533/reviews?hl=en-GB" },
+  { text: "Flooring is impeccable, definitely a bang for your buck! Would recommend.", name: "Cobster Maystry", link: "https://www.google.com/maps/contrib/115435690810126572533/reviews?hl=en-GB" },
   { text: "Really good service and quality. Highly recommend.", name: "Bracyn Valayadum", link: "https://www.google.com/maps/contrib/114545372810914165454/reviews?hl=en-GB" },
   { text: "Very good at what they do, top quality flooring and service as well as the blinds.", name: "Kevin Manhatten", link: "https://www.google.com/maps/contrib/111196853932400830475/reviews?hl=en-GB" },
   { text: "Quality and reliable service.", name: "Liam Matthews", link: "https://www.google.com/maps/contrib/110742829271271846544/reviews?hl=en-GB" },
-  { text: "Professional, Quality, and Value for money. Highly recommended!!!!🙌🙌.", name: "Dale Snell", link: "https://www.google.com/maps/contrib/100399046842648388285/reviews?hl=en-GB" },
+  { text: "Professional, Quality, and Value for money. Highly recommended!", name: "Dale Snell", link: "https://www.google.com/maps/contrib/100399046842648388285/reviews?hl=en-GB" },
   { text: "Highly skilled and friendly team!", name: "Layken Vergotine", link: "https://www.google.com/maps/contrib/107828843692444632834/reviews?hl=en-GB" },
   { text: "The best in town ❤️", name: "Jaulleel Vergotine", link: "https://www.google.com/maps/contrib/116821225464345263392/reviews?hl=en-GB" },
   { text: "Great job and affordable quality 👌 definitely a recommendation", name: "Chanel Pietersen", link: "https://www.google.com/maps/contrib/105661381408676402478/reviews?hl=en-GB" },
@@ -25,12 +25,11 @@ const sliderSettings = {
   slidesToShow: 3,
   slidesToScroll: 1,
   centerMode: true,
-  centerPadding: "0px",
+  centerPadding: "60px",
   autoplay: true,
   autoplaySpeed: 4000,
-  focusOnSelect: true,
   responsive: [
-    { breakpoint: 1024, settings: { slidesToShow: 2, centerMode: false } },
+    { breakpoint: 1024, settings: { slidesToShow: 2, centerMode: true, centerPadding: "40px" } },
     { breakpoint: 768, settings: { slidesToShow: 1, centerMode: false } },
   ],
 };
@@ -76,10 +75,7 @@ const Home = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
-          variants={{
-            hidden: {},
-            visible: { transition: { staggerChildren: 0.2 } }
-          }}
+          variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.2 } } }}
         >
           {[
             "Throughout the years of holidays, Liam, the son of Reynold, helped here and there. During studies, this inspired us to start L&R Laminate Flooring & Maintenance.",
@@ -151,13 +147,13 @@ const Home = () => {
         <h2>What Our Clients Say</h2>
         <Slider {...sliderSettings} className="testimonial-carousel">
           {testimonials.map((t, i) => (
-            <motion.div 
-              key={i} 
+            <motion.div
+              key={i}
               className="testimonial-wrapper"
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.2 }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
             >
               <a
                 href={t.link}
@@ -166,7 +162,8 @@ const Home = () => {
                 className="testimonial-card-link"
               >
                 <div className="testimonial-card">
-                  <p className="testimonial-text">“{t.text}”</p>
+                  <span className="quote">“</span>
+                  <p className="testimonial-text">{t.text}</p>
                   <b className="testimonial-author">- {t.name}</b>
                 </div>
               </a>
