@@ -55,12 +55,59 @@ body, .home { font-family: "Poppins", sans-serif; margin:0; padding:0; backgroun
 .floating-cta:hover { background:var(--highlight); color:var(--primary); transform:scale(1.05); }
 
 /* Responsive */
-@media (max-width:1024px){ .story-cards, .services-grid{justify-content:center;} }
-@media (max-width:768px){
-  .hero h1{font-size:2rem;}
-  .hero p{font-size:1rem;}
-  .story-card, .service-card{width:90%;}
-  .counters{flex-direction:column;}
-  .testimonial-card{min-height:180px; padding:1.5rem;}
-  .slick-slide{padding:0 5px;}
+@media (max-width:1024px) {
+  .story-cards { display:grid; grid-template-columns: repeat(2, 1fr); }
+  .story-card { width:100%; }
+  .services-grid { display:grid; grid-template-columns: repeat(2, 1fr); }
+  .service-card { width:100%; }
+}
+
+@media (max-width:768px) {
+  .hero { padding:4rem 1.5rem 3rem; border-bottom-left-radius:30px; border-bottom-right-radius:30px; }
+  .hero h1 { font-size:2rem; }
+  .hero p { font-size:1rem; }
+  .cta-btn { padding:0.8rem 1.6rem; font-size:0.95rem; }
+
+  .story { padding:3rem 1.5rem; }
+  .story h2 { font-size:1.6rem; }
+  .story-cards { grid-template-columns: 1fr; }
+  .story-card { width:100%; }
+
+  .services { padding:3rem 1.5rem; }
+  .services h2 { font-size:1.6rem; }
+  .services-grid { grid-template-columns: 1fr; }
+  .service-card { width:100%; min-height:160px; }
+
+  .counters { flex-direction:column; align-items:center; padding:2.5rem 1.5rem; gap:1.5rem; }
+  .counter { text-align:center; }
+  .counter h3 { font-size:2rem; }
+
+  .testimonials { padding:3rem 1rem; }
+  .testimonials h2 { font-size:1.6rem; }
+  .testimonial-card { min-height:180px; padding:1.5rem; }
+  .slick-slide { padding:0 5px; }
+
+  .floating-cta { padding:0.7rem 1.2rem; font-size:0.9rem; bottom:15px; right:15px; }
+}
+
+@media (max-width:480px) {
+  .hero { padding:3rem 1rem 2.5rem; border-bottom-left-radius:20px; border-bottom-right-radius:20px; }
+  .hero h1 { font-size:1.6rem; }
+  .hero p { font-size:0.9rem; }
+
+  .story { padding:2rem 1rem; }
+  .story h2 { font-size:1.4rem; }
+  .story-card { padding:1.5rem; }
+
+  .services { padding:2rem 1rem; }
+  .services h2 { font-size:1.4rem; }
+
+  .counters { padding:2rem 1rem; }
+  .counter h3 { font-size:1.8rem; }
+
+  .testimonials { padding:2rem 0.5rem; }
+  .testimonials h2 { font-size:1.4rem; }
+  .testimonial-text { font-size:0.9rem; }
+
+  .floating-cta { padding:0.6rem 1rem; font-size:0.85rem; bottom:12px; right:12px; }
 }
